@@ -7,7 +7,7 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
     .then((results) => {
       const modifiedResults = results.map((result) => ({
         status: result.status,
-        value: result.value ? result.value : result.reason,
+        value: result.value ? result.value : String(result.reason),
       }));
 
       return modifiedResults;

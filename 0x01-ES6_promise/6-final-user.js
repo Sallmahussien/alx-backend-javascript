@@ -10,8 +10,6 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
         value: result.value ? result.value : result.reason,
       }));
 
-      console.log(modifiedResults)
-
       return modifiedResults;
     });
 }

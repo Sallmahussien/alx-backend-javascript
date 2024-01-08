@@ -1,7 +1,3 @@
-const hasValuesFromArray = (set, array) => {
-  const boolArray = array.map((ele) => set.has(ele));
-
-  return boolArray.reduce((total, ele) => total && ele);
-};
+const hasValuesFromArray = (set, array) => array.every((ele) => set.has(ele));
 
 export default hasValuesFromArray;

@@ -1,20 +1,24 @@
 const fs = require('fs');
 
-const createStudentsByField = (dataList) => {
+const parseStudentsByField = (dataList) => {
   const labelsList = dataList[0].split(',');
   const fieldIdx = labelsList.indexOf('field');
   const firstNameIdx = labelsList.indexOf('firstname');
 
   const studentsByField = {};
+  let studentsCount = 0;
 
   for (let i = 1; i < dataList.length; i += 1) {
+    // eslint-disable-next-line no-continue
+    if (dataList[i] === '') continue;
+    studentsCount += 1;
     const studentList = dataList[i].split(',');
     const fieldName = studentList[fieldIdx];
     if (!studentsByField[fieldName]) studentsByField[fieldName] = [];
     studentsByField[fieldName].push(studentList[firstNameIdx]);
   }
 
-  return studentsByField;
+  return { studentsByField, studentsCount };
 };
 
 const printStudentsWithField = (studentsByField) => {
@@ -29,18 +33,18 @@ const printStudentsWithField = (studentsByField) => {
 };
 
 const countStudents = (path) => {
-  let data;
   try {
-    data = fs.readFileSync(path, 'utf-8');
+    const data = fs.readFileSync(path, 'utf-8');
+    const dataList = data.split('\n');
+    const studentsData = parseStudentsByField(dataList);
+    const { studentsByField } = studentsData;
+    const { studentsCount } = studentsData;
+
+    console.log(`Number of students: ${studentsCount}`);
+    printStudentsWithField(studentsByField);
   } catch (error) {
     throw new Error('Cannot load the database');
   }
-
-  const dataList = data.split('\n');
-  const studentsByField = createStudentsByField(dataList);
-
-  console.log(`Number of students: ${dataList.length - 1}`);
-  printStudentsWithField(studentsByField);
 };
 
 module.exports = countStudents;

@@ -28,7 +28,7 @@ const createStudentsByField = (labelsObj, dataList) => {
 
 const printStudentsWithField = (studentsByField) => {
   for (const key in studentsByField) {
-    if (studentsByField.hasOwnPropert(key)) {
+    if (studentsByField.hasOwnProperty(key)) {
       const firstNamesList = studentsByField[key];
       const studentsNumber = firstNamesList.length;
       const firstNamesStr = firstNamesList.join(', ');

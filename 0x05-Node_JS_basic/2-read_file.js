@@ -1,25 +1,16 @@
 const fs = require('fs');
 
-const createLabelIndexObject = (dataList) => {
-  const labelsObj = {};
-
+const createStudentsByField = (dataList) => {
   const labelsList = dataList[0].split(',');
-  labelsList.forEach((label, idx) => {
-    labelsObj[label] = idx;
-  });
+  const fieldIdx = labelsList.indexOf('field');
+  const firstNameIdx = labelsList.indexOf('firstname');
 
-  return labelsObj;
-};
-
-const createStudentsByField = (labelsObj, dataList) => {
   const studentsByField = {};
 
   for (let i = 1; i < dataList.length; i += 1) {
     const studentList = dataList[i].split(',');
-    const fieldIdx = labelsObj.field;
     const fieldName = studentList[fieldIdx];
     if (!studentsByField[fieldName]) studentsByField[fieldName] = [];
-    const firstNameIdx = labelsObj.firstname;
     studentsByField[fieldName].push(studentList[firstNameIdx]);
   }
 
@@ -38,17 +29,18 @@ const printStudentsWithField = (studentsByField) => {
 };
 
 const countStudents = (path) => {
+  let data;
   try {
-    const data = fs.readFileSync(path, 'utf-8');
-    const dataList = data.split('\n');
-    const labelsObj = createLabelIndexObject(dataList);
-    const studentsByField = createStudentsByField(labelsObj, dataList);
-
-    console.log(`Number of students: ${dataList.length - 1}`);
-    printStudentsWithField(studentsByField);
+    data = fs.readFileSync(path, 'utf-8');
   } catch (error) {
     throw new Error('Cannot load the database');
   }
+
+  const dataList = data.split('\n');
+  const studentsByField = createStudentsByField(dataList);
+
+  console.log(`Number of students: ${dataList.length - 1}`);
+  printStudentsWithField(studentsByField);
 };
 
 module.exports = countStudents;

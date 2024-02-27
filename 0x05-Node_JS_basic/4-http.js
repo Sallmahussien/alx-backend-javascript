@@ -12,3 +12,5 @@ const app = http.createServer((req, res) => {
 app.listen(portNumber, hostname, () => {
   console.log(`Server running at http://${hostname}:${portNumber}/`);
 });
+
+module.exports = app;

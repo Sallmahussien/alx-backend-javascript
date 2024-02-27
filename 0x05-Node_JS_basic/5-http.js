@@ -74,7 +74,7 @@ const app = http.createServer((req, res) => {
         const responseText = `This is the list of our students\n${data}`;
         sendResponse(res, responseText);
       }).catch((error) => {
-        const responseText = error.message;
+        const responseText = `This is the list of our students\n${error.message}`;
         sendResponse(res, responseText);
       });
   }

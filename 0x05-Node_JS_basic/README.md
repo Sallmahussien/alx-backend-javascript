@@ -20,7 +20,7 @@
 | 3. Reading a file asynchronously with Node JS |  |
 | 4. Create a small HTTP server using Node's HTTP module |  |
 | 5. Create a more complex HTTP server using Node's HTTP module |  |
-| 6. Create a small HTTP server using Express | [6-http_express.js](./6-http_express.js) |
+| 6. Create a small HTTP server using Express |  |
 | 7. Create a more complex HTTP server using Express | [7-http_express.js](./7-http_express.js) |
 | 8. Organize a complex HTTP server using Express | [full_server/utils.js](./full_server/utils.js), [full_server/controllers/AppController.js](./full_server/controllers/AppController.js), [full_server/controllers/StudentsController.js](./full_server/controllers/StudentsController.js), [full_server/routes/index.js](./full_server/routes/index.js), [full_server/server.js](./full_server/server.js) |
 
@@ -79,3 +79,11 @@ create a small HTTP server using the http module:
 - When the URL path is `/`, it should display `Hello Holberton School!` in the page body
 - When the URL path is `/students`, it should display `This is the list of our students` followed by the same content as the file 3-read_file_async.- js (with and without the database) - the name of the database must be passed as argument of the file
 - CSV file can contain empty lines (at the end) - and they are not a valid student!
+
+[6-http_express.js](./6-http_express.js)
+
+create a small HTTP server using Express module:
+
+- It should be assigned to the variable `app` and this one must be exported
+- HTTP server should listen on port 1245
+- Displays `Hello Holberton School!` in the page body for the endpoint`/
